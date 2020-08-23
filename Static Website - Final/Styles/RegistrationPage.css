@@ -1,0 +1,60 @@
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+
+.FoodOrdering{
+  height: 100%;
+  width: 100%;
+  background-image: url(../Images/Background.jpg);
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  overflow-x: scroll;
+}
+
+.Heading{
+  background-color: red;
+}
+
+.Register{
+  width: 700px;
+  height: 800px;
+  padding: 5px;
+  background: white;
+  margin: 6% auto;
+}
+
+h1 {
+  color: white;
+  font-size: 50px;
+  font-family: 'lobster';
+  text-align: center;
+}
+
+p {
+  color: white;
+  /*line-height: 20px;
+  margin-top: 15px;*/
+  font-size: 23px;
+  text-align: center;
+  margin-top: -5px;
+}
+
+h2 {
+    color: black;
+    font-size: 25px;
+    text-align: center;
+}
+
+select, input[type=text], input[type=password], input[type=number] {
+  width: 80%;
+  padding: 10px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+
+button{
+  width: 100px;
+  font-weight: bold;
+}
