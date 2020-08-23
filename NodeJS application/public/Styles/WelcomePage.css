@@ -1,0 +1,86 @@
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+
+.FoodOrdering{
+  height: 100%;
+  width: 100%;
+  background-image: url(../Images/Background.jpg);
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  overflow-x: scroll;
+}
+
+.Heading{
+  background-color: red;
+}
+
+.Login{
+  width: 400px;
+  height: 440px;
+  padding: 5px;
+  background: white;
+  position: relative;
+  margin: 6% auto;
+}
+
+.SocialMedia{
+  text-align: center;
+  margin: 20px auto;
+}
+
+.SocialMedia img{
+  width: 30px;
+  margin: 0 12px;
+  border-radius: 50%;
+}
+
+
+
+h1 {
+  color: white;
+  font-size: 50px;
+  font-family: 'lobster';
+  text-align: center;
+}
+
+p {
+  color: white;
+  /*line-height: 20px;
+  margin-top: 15px;*/
+  font-size: 23px;
+  text-align: center;
+  margin-top: -5px;
+}
+
+
+h2 {
+    color: black;
+    font-size: 25px;
+    text-align: center;
+}
+
+h3 {
+    color: white;
+    font-size: 30px;
+}
+
+.label{
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+input[type=text], input[type=password] {
+  width: 50%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+button{
+  width: 100px;
+  font-weight: bold;
+}
+

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Food Ordering System</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!-- For DataTable -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="Styles/style.css">
+    </head>
+    <style>
+        .form-control {
+            width: 66%;
+        }
+        .dataTables_paginate {
+            display: none;
+        }
+        table.table td a.edit {
+         color: #FFC107;
+        }
+       table.table td a.delete {
+        color: #E34724;
+         }
+         table.table td a.add {
+         color: #27C46B;
+        }
+        table.table td .add {
+         display: none;
+        }
+    </style>
+    <body>
+        <%- include('layouts/header'); -%>
+        <div class="content-wrapper">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <h4 class="card-title"></h4> 
+                </div>
+            </div>
+            <%- include('layouts/navigation'); -%>
+            <div>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" style="margin-top: 15px;width: 13%;margin-left: 18px;">
+                            + Add Menu
+                        </button>
+                        <div class="card-body">
+                            <!-- <h4 class="card-title font-17">Todays Order</h4> -->
+                            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th> Item Number </th>
+                                        <th> Name </th>
+                                        <th> Description </th>
+                                        <th> Price </th>
+                                        <th>Availabilty</th>
+                                        <th style="display:none;"> ID</th>
+                                        <th> Options </th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody  id="items">
+                                    <% if(typeof menus !== 'undefined' && menus.length > 0) {  %>
+                                    <% menus.forEach(function(menu) { %> 
+                                        <tr>  
+                                         <td id ='number'><%= menu.number %></td>
+                                         <td id='name'><%= menu.name %></td>
+                                         <td id ='description'><%= menu.description %></td>
+                                         <td id='price'><%= menu.price %></td>
+                                         <td id='available'><%= menu.available %></td>
+                                         <td id='id' style="display:none;"><%= menu._id %></td>
+                                         <td> 
+                                         <a class="edit" type="button" title="Edit" data-toggle="modal" data-target="#exampleModal1"><i class="material-icons">&#xE254;</i></a>
+                                         <a class="delete" type="button" title="Delete" data-toggle="modal" data-target="#exampleModal2"><i class="material-icons">&#xE872;</i></a>
+                                        </td>
+                                       </tr>
+                                       <% }); %>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Menu</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form style="width: 700px;" name="myform" id="myform" action="/createMenu" method="POST">
+                    <div class="form-group">
+                        <label>Item No</label>
+                        <input type="text" name="rno" class="form-control rname" placeholder="Item No" >
+                    </div>
+                    <div class="form-group">
+                        <label>Item Name</label>
+                        <input type="text" name="rname" class="form-control rname" placeholder="Item Name" >
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control description" name="description" placeholder="Description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPrice">Price</label>
+                        <input type="number" name="price" class="form-control price" >
+                    </div>
+                    <div class="form-group">
+                        <label>Availabilty</label>
+                        <select class="form-control availabilty" name="available">  
+                            <option selected>Choose...</option>
+                            <option value="yes">Available</option>
+                            <option value="no">Not Available</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer" style="width: 470px;">
+                        <button type="submit" class="btn btn-success submit">Save</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Update Menu</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form style="width: 700px;" name="myform" id="myeditform" action="/updateMenu" method="POST">
+                    <div class="form-group"style="display:none;">
+                        <label>Id</label>
+                        <input type="text" id="edit_id" name="_id" class="form-control _id" placeholder="Item Id" >
+                    </div>
+                    <div class="form-group">
+                        <label>Item No</label>
+                        <input type="text" id="edit_rno" name="rno" class="form-control rname" placeholder="Item No" >
+                    </div>
+                    <div class="form-group">
+                        <label>Item Name</label>
+                        <input type="text" id="edit_rname" name="rname" class="form-control rname" placeholder="Item Name" >
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control description" id="edit_description" name="description" placeholder="Description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPrice">Price</label>
+                        <input type="text" id="edit_price" name="price" class="form-control price" >
+                    </div>
+                    <div class="form-group">
+                        <label>Availabilty</label>
+                        <select class="form-control availabilty" id="edit_available" name="available">  
+                            <option selected>Choose...</option>
+                            <option value="yes">Available</option>
+                            <option value="no">Not Available</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer" style="width: 470px;">
+                        <button type="submit" class="btn btn-info submit">Update</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Delete Menu</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form style="width: 700px;" name="myform" id="mydeleteform" action="/deleteMenu" method="POST">
+                    <div class="form-group"style="display:none;">
+                        <label>Id</label>
+                        <input type="text" id="delete_id" name="_id" class="form-control _id" placeholder="Item Id" >
+                    </div>
+                    <div class="form-group">
+                        <label>Item No</label>
+                        <input type="text" id="delete_rno" name="rno" class="form-control rname" placeholder="Item No"  disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Item Name</label>
+                        <input type="text" id="delete_rname" name="rname" class="form-control rname" placeholder="Item Name"  disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control description" id="delete_description" name="description" placeholder="Description" disabled></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPrice">Price</label>
+                        <input type="text" id="delete_price" name="price" class="form-control price"  disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Availabilty</label>
+                        <select class="form-control availabilty" id="delete_available" name="available" disabled>  
+                            <option selected>Choose...</option>
+                            <option value="yes">Available</option>
+                            <option value="no">Not Available</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer" style="width: 470px;">
+                        <button type="submit" class="btn btn-danger submit">Delete</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+    </div>
+    <script src="JavaScript/sampledata.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        } );
+        $('table').on('click', ".edit",function (ele) {
+        var myModal = $('#exampleModal1');
+        var tr = ele.target.parentNode.parentNode.parentNode;
+        var no = tr.cells[0].textContent;
+        var name = tr.cells[1].textContent;
+        var desc = tr.cells[2].textContent;
+        var price = tr.cells[3].textContent;
+        var available = tr.cells[4].textContent;
+        var id = tr.cells[5].textContent;
+        $('#edit_rno').val(no);
+        $('#edit_rname').val(name);
+        $('#edit_description').val(desc);
+        $('#edit_price').val(price);
+        $('#edit_available').val(available);
+        $('#edit_id').val(id);
+		});		
+		
+    // Delete row on delete button click
+    $('table').on('click', ".delete",function (ele) {
+        var myModal = $('#exampleModal2');
+        var tr = ele.target.parentNode.parentNode.parentNode;
+        var no = tr.cells[0].textContent;
+        var name = tr.cells[1].textContent;
+        var desc = tr.cells[2].textContent;
+        var price = tr.cells[3].textContent;
+        var available = tr.cells[4].textContent;
+        var id = tr.cells[5].textContent;
+        $('#delete_rno').val(no);
+        $('#delete_rname').val(name);
+        $('#delete_description').val(desc);
+        $('#delete_price').val(price);
+        $('#delete_available').val(available);
+        $('#delete_id').val(id);
+		});	
+    </script>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Food Ordering System</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="styles/WelcomePage.css">
+        <!-- <script src="WelcomePage.js"></script> -->
+    </head>
+    <body>
+        <div class="FoodOrdering">
+            <div class = "Heading">
+                <h1>Welcome to food Ordering System</h1>
+                <p>Are you a restaurant business owner? Sign up to create an online menu 
+                for your restaurant to allow your customers to place online orders for food.</p>
+            </div>
+            <div class="Login">
+                <img class="img-rounded" src="images/logo.jpg" alt="" style="max-height: 50px;max-height: 50px;float: right;margin-top: 10px;">
+                <div class="InputItems" style="margin-top:70px">
+                    <form action="/login" method="POST" name="myform" class="was-validated" style="padding-left: 20px;" >
+                        <div class="form-group">
+                          <label for="uname">Username:</label>
+                          <input type="text" class="form-control" id="uname" placeholder="Enter username" name="name"  style="width: 260px;margin-bottom: 0px;">
+                        </div>
+                        <div class="form-group">
+                          <label for="pwd">Password:</label>
+                          <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password" style="width: 260px;margin-bottom: 0px"> 
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="margin: 5px 125px 5px;" onsubmit="validateForm();">Submit</button>
+                    </form>
+                </div>
+                <div class="SocialMedia">
+                    <img src="Images/Facebook.png">
+                    <img src="Images/Google.png">
+                    <img src="Images/Twitter.png">
+                </div>
+                <div class = "container">
+                    <% if(typeof errors !== 'undefined' && errors.length > 0) { 
+                        for(var error of errors){ %>
+                         <p style="color:red;font-size:medium;"><%=error.msg %></p>    
+                    <% }
+                    } %>
+                </div>
+            </div>
+        </div>     
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+     </body>
+</html>
+<script>  
+    $(".email").hide();
+    $(".password").hide();
+    function validateform(){  
+        var name=document.myform.name.value;  
+        var password=document.myform.password.value; 
+        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        while((re.test(name)==false) || (password.length<8))
+        {
+            if (re.test(name)==false){  
+                $(".email").show(); 
+            }
+            if (password.length<8){  
+                $(".password").show();  
+            }  
+            return false; 
+        }
+    }  
+</script>  
